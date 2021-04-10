@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+    web-sync:
+        build: ./async
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db-sync-async-test
+            - web-async
+    web-async:
+        build: ./sync
+        ports:
+            - "8001:8000"
+        depends_on:
+            - db-sync-async-test
+    db-sync-async-test:
+        image: "postgres"
+        environment:
+            POSTGRES_PASSWORD: "1234"
